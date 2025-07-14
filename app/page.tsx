@@ -42,7 +42,7 @@ export default async function WeatherPage() {
         </div>
       </div>
     );
-  } catch (error) {
+  } catch {
     // 错误处理：如果API调用失败，显示错误页面
     return <ErrorPage />;
   }

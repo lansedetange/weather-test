@@ -11,7 +11,7 @@ export function ErrorPage() {
       <div className="text-center text-white px-4">
         <h1 className="text-4xl font-bold mb-4">Weather Unavailable</h1>
         <p className="text-red-100 mb-6">
-          Sorry, we couldn't fetch weather data at the moment.
+          Sorry, we couldn&apos;t fetch weather data at the moment.
         </p>
         <button 
           onClick={handleRetry}

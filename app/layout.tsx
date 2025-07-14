@@ -18,7 +18,11 @@ export const metadata: Metadata = {
   description: "Discover weather conditions from random cities around the world using Open Meteo API",
   keywords: ["weather", "forecast", "global", "random", "open meteo"],
   authors: [{ name: "Weather App" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
