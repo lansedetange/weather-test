@@ -20,6 +20,14 @@ export default async function WeatherPage() {
             <p className="text-blue-100 text-lg md:text-xl">
               Discover weather conditions from around the world
             </p>
+            <div className="mt-6">
+              <a 
+                href="/weather"
+                className="inline-block bg-white/20 hover:bg-white/30 text-white font-semibold py-3 px-6 rounded-lg transition-colors"
+              >
+                🌍 Try OpenWeatherMap Search →
+              </a>
+            </div>
           </header>
           
           <Suspense fallback={<WeatherLoading />}>
