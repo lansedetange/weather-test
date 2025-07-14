@@ -48,6 +48,21 @@
 npm install
 ```
 
+### 环境变量配置
+
+在项目根目录创建 `.env.local` 文件：
+
+```bash
+# OpenWeatherMap API 密钥
+# 请访问 https://openweathermap.org/api 获取您的API密钥
+NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
+```
+
+**重要说明**：
+- `.env.local` 文件已被git忽略，不会提交到代码仓库
+- 部署到生产环境时，请在部署平台设置相应的环境变量
+- 不要将API密钥直接写在代码中
+
 ### 启动开发服务器
 ```bash
 npm run dev
@@ -100,7 +115,7 @@ weather-test/
 - **需要API Key** - 免费套餐1000次/天
 - **获取数据**: 当前天气、5天预报、城市搜索
 - **包含信息**: 详细天气数据、气压、能见度、精确坐标等
-- **API Key**: 已集成用户提供的密钥 `e0deeb26d16b94799bd340173dfcb26e`
+- **API Key**: 通过环境变量 `NEXT_PUBLIC_OPENWEATHER_API_KEY` 配置
 
 ## 支持的城市
 

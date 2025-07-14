@@ -10,8 +10,18 @@ import type {
 const OPENWEATHER_BASE_URL = 'https://api.openweathermap.org/data/2.5';
 const GEOCODING_BASE_URL = 'https://api.openweathermap.org/geo/1.0';
 
-// API密钥 - 用户提供的密钥
-const API_KEY = 'e0deeb26d16b94799bd340173dfcb26e';
+// 从环境变量获取API密钥
+function getApiKey(): string {
+  const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_API_KEY;
+  
+  if (!apiKey) {
+    throw new Error(
+      'OpenWeatherMap API密钥未配置。请在 .env.local 文件中设置 NEXT_PUBLIC_OPENWEATHER_API_KEY 环境变量。'
+    );
+  }
+  
+  return apiKey;
+}
 
 // 构建API查询URL的函数
 function buildApiUrl(endpoint: string, params: OpenWeatherParams): string {
@@ -56,7 +66,7 @@ export async function getCurrentWeather(
   const params: OpenWeatherParams = {
     lat,
     lon,
-    appid: API_KEY,
+    appid: getApiKey(),
     units,
     lang: 'en'
   };
@@ -93,7 +103,7 @@ export async function getFiveDayForecast(
   const params: OpenWeatherParams = {
     lat,
     lon,
-    appid: API_KEY,
+    appid: getApiKey(),
     units,
     lang: 'en'
   };
@@ -125,7 +135,7 @@ export async function getFiveDayForecast(
 export async function searchCitiesByName(cityName: string, limit: number = 5): Promise<GeocodingResponse[]> {
   const params: CitySearchParams = {
     q: cityName,
-    appid: API_KEY,
+    appid: getApiKey(),
     limit
   };
 
