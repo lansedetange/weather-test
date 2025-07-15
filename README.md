@@ -17,8 +17,9 @@
 
 ### 🎨 用户体验
 - **响应式设计** - 完美适配移动端和桌面端
-- **现代化技术栈** - Next.js 15 + TypeScript + Tailwind CSS
-- **优美的UI设计** - 渐变背景、毛玻璃效果、动画过渡
+- **现代化技术栈** - Next.js 15 + TypeScript + Tailwind CSS + GSAP动画
+- **优美的UI设计** - 渐变背景、毛玻璃效果、精美动画过渡
+- **GSAP动画系统** - 页面加载动画、温度计数、卡片交错、hover效果
 - **智能错误处理** - 友好的错误提示和重试机制
 
 ## 技术架构
@@ -27,6 +28,7 @@
 - **Next.js 15** - React框架，使用App Router
 - **TypeScript** - 类型安全的JavaScript
 - **Tailwind CSS** - 实用程序优先的CSS框架
+- **GSAP** - 高性能动画库，提供流畅的交互体验
 - **React 18** - 用户界面库
 
 ### 服务器组件与客户端组件分离
@@ -84,8 +86,10 @@ weather-test/
 │   │   └── page.tsx       # 天气搜索页面（服务器组件）
 │   └── globals.css        # 全局样式
 ├── components/            # React组件
-│   ├── WeatherContent.tsx    # Open Meteo天气内容组件（客户端组件）
+│   ├── WeatherContent.tsx    # Open Meteo天气内容组件（客户端组件，含GSAP动画）
 │   ├── OpenWeatherContent.tsx # OpenWeatherMap内容组件（客户端组件）
+│   ├── AnimatedHeader.tsx    # 首页动画Header组件
+│   ├── OpenWeatherHeader.tsx # OpenWeather页面动画Header组件
 │   ├── *Loading.tsx       # 加载状态组件
 │   └── *Error.tsx         # 错误页面组件（客户端组件）
 ├── lib/                   # 业务逻辑库
@@ -157,7 +161,26 @@ OpenWeatherMap API支持全球任意城市搜索。
 - 响应式设计
 - 图片优化和懒加载
 
+### 动画系统 (GSAP)
+- **页面加载动画** - 元素交错渐入，提升视觉体验
+- **温度计数动画** - 从0开始计数到实际温度
+- **天气图标动画** - 浮动脉冲效果，增强生动性
+- **卡片交互动画** - hover时微妙放大和发光效果
+- **按钮反馈动画** - 点击时的视觉反馈和脉冲效果
+- **标题特效** - 渐变文字和微妙浮动效果
+- **性能优化** - 使用GSAP Context确保动画清理
+
 ## 更新日志
+
+### v1.2.0 (2025-01-25)
+- 🎬 新增GSAP动画系统
+- ✨ 实现页面加载动画和元素交错效果
+- 🔢 添加温度计数动画
+- 🌟 增强天气图标浮动脉冲动画
+- 🎯 完善卡片hover和按钮交互动画
+- 🎨 创建动画Header组件（首页和OpenWeather页面）
+- 🔒 完成API密钥安全改进（迁移至环境变量）
+- 📦 安装并集成GSAP动画库
 
 ### v1.1.0 (2025-01-25)
 - ✅ 新增OpenWeatherMap API天气页面 `/weather`
