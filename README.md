@@ -62,6 +62,10 @@ NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
 # Google Analytics 追踪ID
 # 请访问 https://analytics.google.com 获取您的追踪ID
 NEXT_PUBLIC_GA_ID=your_ga_tracking_id_here
+
+# Microsoft Clarity 项目ID
+# 请访问 https://clarity.microsoft.com 获取您的项目ID
+NEXT_PUBLIC_CLARITY_PROJECT_ID=your_clarity_project_id_here
 ```
 
 **重要说明**：
@@ -95,6 +99,7 @@ weather-test/
 │   ├── AnimatedHeader.tsx    # 首页动画Header组件
 │   ├── OpenWeatherHeader.tsx # OpenWeather页面动画Header组件
 │   ├── GoogleAnalytics.tsx  # Google Analytics脚本组件
+│   ├── MicrosoftClarity.tsx # Microsoft Clarity脚本组件
 │   ├── RouteTracker.tsx     # 路由追踪组件
 │   ├── *Loading.tsx       # 加载状态组件
 │   └── *Error.tsx         # 错误页面组件（客户端组件）
@@ -135,6 +140,14 @@ weather-test/
 - **用户交互**: 追踪按钮点击、搜索行为、错误事件
 - **配置方式**: 通过环境变量 `NEXT_PUBLIC_GA_ID` 配置
 - **隐私保护**: 仅在有追踪ID时启用，符合数据保护要求
+
+### Microsoft Clarity 用户行为分析
+- **行为追踪**: 集成Microsoft Clarity用户行为分析
+- **热力图**: 记录用户鼠标移动轨迹和点击热点
+- **会话录屏**: 提供用户行为的可视化重放
+- **用户体验分析**: 分析用户与界面的交互模式
+- **配置方式**: 通过环境变量 `NEXT_PUBLIC_CLARITY_PROJECT_ID` 配置
+- **隐私合规**: 仅在配置项目ID时启用，保护用户隐私
 
 ## 支持的城市
 
@@ -195,6 +208,15 @@ OpenWeatherMap API支持全球任意城市搜索。
 - **性能优化** - 使用Next.js Script组件优化加载性能
 
 ## 更新日志
+
+### v1.4.0 (2025-01-25)
+- 📊 新增Microsoft Clarity用户行为分析集成
+- 🖱️ 实现用户鼠标轨迹和点击热力图追踪
+- 📹 添加用户会话录屏功能
+- 🎯 完善用户体验分析能力
+- 🔐 确保隐私合规，使用环境变量管理项目ID
+- 📋 创建Clarity脚本组件，统一管理追踪代码
+- 🛡️ 条件加载，仅在配置时启用Clarity追踪
 
 ### v1.3.0 (2025-01-25)
 - 📊 新增Google Analytics 4集成

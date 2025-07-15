@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { MicrosoftClarity } from "@/components/MicrosoftClarity";
 import { RouteTracker } from "@/components/RouteTracker";
 import "./globals.css";
 
@@ -37,6 +38,8 @@ export default function RootLayout({
       <head>
         {/* Google Analytics脚本 */}
         <GoogleAnalytics />
+        {/* Microsoft Clarity脚本 */}
+        <MicrosoftClarity />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
