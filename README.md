@@ -52,26 +52,52 @@ npm install
 
 ### 环境变量配置
 
-在项目根目录创建 `.env.local` 文件：
+在项目根目录创建 `.env.local` 文件，参考 `.env.example` 模板：
 
 ```bash
-# OpenWeatherMap API 密钥
-# 请访问 https://openweathermap.org/api 获取您的API密钥
+# 复制环境变量模板
+cp .env.example .env.local
+```
+
+然后编辑 `.env.local` 文件，配置以下关键环境变量：
+
+#### 🔑 必需配置（生产环境）
+```bash
+# OpenWeatherMap API 密钥（必需）
 NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
 
-# Google Analytics 追踪ID
-# 请访问 https://analytics.google.com 获取您的追踪ID
-NEXT_PUBLIC_GA_ID=your_ga_tracking_id_here
+# Google Analytics 4 追踪ID（推荐）
+NEXT_PUBLIC_GA_ID=G-XXXXXXXXXX
 
-# Microsoft Clarity 项目ID
-# 请访问 https://clarity.microsoft.com 获取您的项目ID
-NEXT_PUBLIC_CLARITY_PROJECT_ID=your_clarity_project_id_here
+# Microsoft Clarity 项目ID（推荐）
+NEXT_PUBLIC_CLARITY_PROJECT_ID=your_clarity_project_id
+
+# 应用程序部署URL（生产环境必需）
+NEXT_PUBLIC_APP_URL=https://your-domain.com
+```
+
+#### 🛠️ 可选配置
+```bash
+# 应用信息
+NEXT_PUBLIC_APP_NAME=Weather App
+NEXT_PUBLIC_APP_VERSION=1.4.0
+
+# 性能和监控
+NEXT_PUBLIC_ENABLE_ANALYTICS=true
+NEXT_PUBLIC_API_TIMEOUT=10000
+NEXT_PUBLIC_WEATHER_CACHE_TIME=10
+
+# Next.js优化
+NODE_ENV=production
+NEXT_TELEMETRY_DISABLED=1
 ```
 
 **重要说明**：
 - `.env.local` 文件已被git忽略，不会提交到代码仓库
-- 部署到生产环境时，请在部署平台设置相应的环境变量
-- 不要将API密钥和追踪ID直接写在代码中
+- `.env.example` 提供了完整的环境变量配置模板
+- 生产环境部署时，请在部署平台设置相应的环境变量
+- 所有 `NEXT_PUBLIC_` 前缀的变量会暴露到客户端
+- 敏感信息（如API密钥）请妥善保管，不要泄露
 
 ### 启动开发服务器
 ```bash
@@ -116,6 +142,8 @@ weather-test/
 │       ├── locations.ts   # 城市坐标数据
 │       ├── weather-codes.ts      # WMO天气代码
 │       └── openweather-icons.ts  # OpenWeatherMap图标
+├── .env.local             # 环境变量配置文件（本地/生产）
+├── .env.example           # 环境变量配置模板
 └── public/                # 静态资源
 ```
 
@@ -208,6 +236,16 @@ OpenWeatherMap API支持全球任意城市搜索。
 - **性能优化** - 使用Next.js Script组件优化加载性能
 
 ## 更新日志
+
+### v1.4.1 (2025-01-25)
+- ⚙️ 完善生产环境配置管理
+- 📋 创建完整的 `.env.local` 环境变量配置文件
+- 📖 新增 `.env.example` 配置模板，便于团队协作
+- 🔧 添加应用程序配置变量（APP_URL、APP_NAME、APP_VERSION）
+- 🚀 新增性能和监控相关环境变量配置
+- ⚡ 优化Next.js生产环境配置（遥测、缓存等）
+- 📚 更新README.md环境变量配置文档
+- 🛡️ 完善环境变量安全说明和最佳实践
 
 ### v1.4.0 (2025-01-25)
 - 📊 新增Microsoft Clarity用户行为分析集成
