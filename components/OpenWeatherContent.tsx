@@ -9,6 +9,7 @@ import type {
 } from '@/lib/types/openweather';
 import { getWeatherByCity } from '@/lib/services/openweather';
 import { getWeatherIcon } from '@/lib/data/openweather-icons';
+import { event as gtag_event } from '@/lib/gtag';
 
 interface OpenWeatherContentProps {
   initialData: {
@@ -34,11 +35,33 @@ export function OpenWeatherContent({ initialData }: OpenWeatherContentProps) {
     setIsLoading(true);
     setError(null);
     
+    // Google Analytics事件追踪
+    gtag_event({
+      action: 'search',
+      category: 'Weather',
+      label: 'City Search',
+    });
+    
     try {
       const data = await getWeatherByCity(searchQuery.trim(), 'metric');
       setWeatherData(data);
+      
+      // 搜索成功事件追踪
+      gtag_event({
+        action: 'search_success',
+        category: 'Weather',
+        label: data.location.name,
+      });
+      
       setSearchQuery(''); // 清空搜索框
     } catch (err) {
+      // 搜索失败事件追踪
+      gtag_event({
+        action: 'search_error',
+        category: 'Weather',
+        label: searchQuery.trim(),
+      });
+      
       setError(err instanceof Error ? err.message : 'Failed to fetch weather data');
     } finally {
       setIsLoading(false);

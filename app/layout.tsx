@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
+import { RouteTracker } from "@/components/RouteTracker";
 import "./globals.css";
 
 const geistSans = localFont({
@@ -32,9 +34,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics脚本 */}
+        <GoogleAnalytics />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* 路由追踪器 */}
+        <RouteTracker />
         {children}
       </body>
     </html>

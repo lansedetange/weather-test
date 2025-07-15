@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import type { LocationData, WeatherApiResponse } from '@/lib/types/weather';
 import { getWeatherCodeInfo } from '@/lib/data/weather-codes';
+import { event as gtag_event } from '@/lib/gtag';
 
 interface WeatherContentProps {
   location: LocationData;
@@ -28,6 +29,13 @@ export function WeatherContent({ location, weather }: WeatherContentProps) {
   // 处理刷新按钮点击
   const handleRefresh = async () => {
     setIsRefreshing(true);
+    
+    // Google Analytics事件追踪
+    gtag_event({
+      action: 'click',
+      category: 'Weather',
+      label: 'Random City Refresh',
+    });
     
     // 按钮点击动画
     if (buttonRef.current) {

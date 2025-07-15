@@ -58,12 +58,16 @@ npm install
 # OpenWeatherMap API 密钥
 # 请访问 https://openweathermap.org/api 获取您的API密钥
 NEXT_PUBLIC_OPENWEATHER_API_KEY=your_api_key_here
+
+# Google Analytics 追踪ID
+# 请访问 https://analytics.google.com 获取您的追踪ID
+NEXT_PUBLIC_GA_ID=your_ga_tracking_id_here
 ```
 
 **重要说明**：
 - `.env.local` 文件已被git忽略，不会提交到代码仓库
 - 部署到生产环境时，请在部署平台设置相应的环境变量
-- 不要将API密钥直接写在代码中
+- 不要将API密钥和追踪ID直接写在代码中
 
 ### 启动开发服务器
 ```bash
@@ -86,19 +90,23 @@ weather-test/
 │   │   └── page.tsx       # 天气搜索页面（服务器组件）
 │   └── globals.css        # 全局样式
 ├── components/            # React组件
-│   ├── WeatherContent.tsx    # Open Meteo天气内容组件（客户端组件，含GSAP动画）
-│   ├── OpenWeatherContent.tsx # OpenWeatherMap内容组件（客户端组件）
+│   ├── WeatherContent.tsx    # Open Meteo天气内容组件（客户端组件，含GSAP动画和GA追踪）
+│   ├── OpenWeatherContent.tsx # OpenWeatherMap内容组件（客户端组件，含GA追踪）
 │   ├── AnimatedHeader.tsx    # 首页动画Header组件
 │   ├── OpenWeatherHeader.tsx # OpenWeather页面动画Header组件
+│   ├── GoogleAnalytics.tsx  # Google Analytics脚本组件
+│   ├── RouteTracker.tsx     # 路由追踪组件
 │   ├── *Loading.tsx       # 加载状态组件
 │   └── *Error.tsx         # 错误页面组件（客户端组件）
 ├── lib/                   # 业务逻辑库
 │   ├── types/             # TypeScript类型定义
 │   │   ├── weather.ts     # Open Meteo API类型
-│   │   └── openweather.ts # OpenWeatherMap API类型
+│   │   ├── openweather.ts # OpenWeatherMap API类型
+│   │   └── gtag.d.ts      # Google Analytics类型定义
 │   ├── services/          # API服务
 │   │   ├── weather.ts     # Open Meteo服务
 │   │   └── openweather.ts # OpenWeatherMap服务
+│   ├── gtag.ts            # Google Analytics工具函数
 │   └── data/              # 静态数据
 │       ├── locations.ts   # 城市坐标数据
 │       ├── weather-codes.ts      # WMO天气代码
@@ -120,6 +128,13 @@ weather-test/
 - **获取数据**: 当前天气、5天预报、城市搜索
 - **包含信息**: 详细天气数据、气压、能见度、精确坐标等
 - **API Key**: 通过环境变量 `NEXT_PUBLIC_OPENWEATHER_API_KEY` 配置
+
+### Google Analytics 数据分析
+- **追踪系统**: 集成Google Analytics 4 (GA4)
+- **页面浏览**: 自动追踪页面访问和路由变化
+- **用户交互**: 追踪按钮点击、搜索行为、错误事件
+- **配置方式**: 通过环境变量 `NEXT_PUBLIC_GA_ID` 配置
+- **隐私保护**: 仅在有追踪ID时启用，符合数据保护要求
 
 ## 支持的城市
 
@@ -170,7 +185,25 @@ OpenWeatherMap API支持全球任意城市搜索。
 - **标题特效** - 渐变文字和微妙浮动效果
 - **性能优化** - 使用GSAP Context确保动画清理
 
+### 数据分析系统 (Google Analytics)
+- **页面追踪** - 自动记录页面浏览量和用户访问路径
+- **用户交互追踪** - 记录按钮点击、搜索查询等用户行为
+- **事件分类** - 按照天气相关功能分类追踪事件
+- **搜索分析** - 追踪城市搜索的成功率和热门搜索
+- **错误监控** - 追踪API错误和用户遇到的问题
+- **隐私合规** - 仅在配置追踪ID时启用，保护用户隐私
+- **性能优化** - 使用Next.js Script组件优化加载性能
+
 ## 更新日志
+
+### v1.3.0 (2025-01-25)
+- 📊 新增Google Analytics 4集成
+- 🔍 实现页面浏览量和路由变化追踪
+- 📈 添加用户交互事件追踪（按钮点击、搜索等）
+- 🎯 完善天气相关事件分析
+- 🔐 确保隐私合规，仅在配置时启用追踪
+- 📋 创建GA工具函数和类型定义
+- 🛡️ 使用环境变量安全管理追踪ID
 
 ### v1.2.0 (2025-01-25)
 - 🎬 新增GSAP动画系统
